@@ -1,0 +1,190 @@
+:root {
+  --bg: #1e1513;
+  --panel: #2a201d;
+  --panel-2: #362a26;
+  --text: #ffffff;
+  --muted: #b9b1aa;
+  --green: #84bc41;
+  --green-dark: #1d4f27;
+  --green-mid: #479c53;
+  --amber: #cb9831;
+  --red: #c0533f;
+  font-family: 'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 560px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 2px solid var(--green);
+}
+
+.brand { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.brand-name { font-weight: 700; letter-spacing: 0.04em; }
+.brand-sub { font-size: 12px; color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.location {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--green-mid);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.gear {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.settings {
+  padding: 12px 14px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--panel-2);
+  font-size: 13px;
+  color: var(--muted);
+}
+.settings input {
+  width: 100%;
+  margin: 8px 0;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 0;
+  align-items: center;
+}
+
+nav button, nav a {
+  flex: 1;
+  text-align: center;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-2);
+  border-radius: 10px;
+  padding: 10px 6px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+nav button.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: #10240c;
+  font-weight: 700;
+}
+
+nav a { color: var(--green); }
+
+main { flex: 1; padding: 14px; }
+
+.viewport {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 4 / 3;
+}
+
+.viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reticle {
+  position: absolute;
+  inset: 18% 12%;
+  border: 2px solid rgba(132, 188, 65, 0.85);
+  border-radius: 10px;
+  pointer-events: none;
+  box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.25);
+}
+
+.camera-error { color: var(--amber); font-size: 13px; }
+
+.manual {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.manual input, .settings input, .import input, .import textarea {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--panel-2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 11px 12px;
+  font-size: 15px;
+  width: 100%;
+}
+
+.manual button, .import button, .settings button {
+  background: var(--green);
+  color: #10240c;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.events { display: flex; flex-direction: column; gap: 8px; }
+
+.event {
+  background: var(--panel);
+  border-left: 4px solid var(--muted);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.event.matched { border-left-color: var(--green); }
+.event.unmatched { border-left-color: var(--amber); }
+.event.error { border-left-color: var(--red); }
+
+.event-top { display: flex; justify-content: space-between; gap: 8px; }
+.tracking { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 14px; word-break: break-all; }
+.meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.detail { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.event.matched .detail { color: var(--green); }
+.event.unmatched .detail { color: var(--amber); }
+
+.hint { color: var(--muted); font-size: 13px; line-height: 1.5; }
+.hint code { color: var(--green); }
+
+.import { display: flex; flex-direction: column; gap: 10px; }
+.import label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
+.import textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.status { color: var(--green); font-size: 14px; }
+
+footer {
+  padding: 10px 14px 18px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
