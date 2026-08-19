@@ -20,7 +20,7 @@ export default function App() {
   }, [location]);
 
   return (
-    <div className="app">
+    <div className={tab === 'inventory' ? 'app wide' : 'app'}>
       <header>
         <div className="brand">
           <span className="brand-name">PUMA Works</span>
