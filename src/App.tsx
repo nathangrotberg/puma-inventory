@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import Scanner from './components/Scanner';
 import ImportForm from './components/ImportForm';
+import Inventory from './components/Inventory';
 import { flowUrl } from './api';
 
 const LOCATIONS = ['Redding', 'Visalia', 'Meadowview', 'Site - Other'];
 
 const LISTS_URL =
-  'https://maasenergy.sharepoint.com/sites/ArtificialIntelligence/Lists/PUMA%20Inventory%20Packages/AllItems.aspx';
+  'https://maasenergy.sharepoint.com/sites/ArtificialIntelligence/SitePages/PUMA-Inventory.aspx';
 
 export default function App() {
-  const [tab, setTab] = useState<'scan' | 'expect'>('scan');
+  const [tab, setTab] = useState<'scan' | 'expect' | 'inventory'>('scan');
   const [location, setLocation] = useState(() => localStorage.getItem('location') || 'Redding');
   const [showSettings, setShowSettings] = useState(false);
   const [urlDraft, setUrlDraft] = useState('');
@@ -66,15 +67,24 @@ export default function App() {
         <button className={tab === 'expect' ? 'active' : ''} onClick={() => setTab('expect')}>
           Add expected
         </button>
-        <a href={LISTS_URL} target="_blank" rel="noreferrer">
-          Inventory lists
-        </a>
+        <button className={tab === 'inventory' ? 'active' : ''} onClick={() => setTab('inventory')}>
+          Inventory
+        </button>
       </nav>
 
-      <main>{tab === 'scan' ? <Scanner location={location} /> : <ImportForm />}</main>
+      <main>
+        {tab === 'scan' && <Scanner location={location} />}
+        {tab === 'expect' && <ImportForm />}
+        {tab === 'inventory' && <Inventory />}
+      </main>
 
       <footer>
-        <span>Maas Energy Works · PUMA Works inventory POC (O24)</span>
+        <span>
+          Maas Energy Works · PUMA Works inventory POC (O24) ·{' '}
+          <a className="footer-link" href={LISTS_URL} target="_blank" rel="noreferrer">
+            SharePoint
+          </a>
+        </span>
       </footer>
     </div>
   );

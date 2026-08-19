@@ -42,6 +42,51 @@ export function postScan(input: {
   return post<ScanResult>({ action: 'scan', ...input });
 }
 
+export interface SPOrder {
+  Id: number;
+  Title: string;
+  Vendor?: string;
+  PONumber?: string;
+  OrderStatus?: string;
+  Source?: string;
+  ETA?: string | null;
+  Notes?: string;
+  Created: string;
+}
+
+export interface SPPackage {
+  Id: number;
+  Title: string;
+  OrderRef?: number | null;
+  Carrier?: string;
+  PkgStatus?: string;
+  ETA?: string | null;
+  ReceivedAt?: string | null;
+  ReceivedLocation?: string;
+  Contents?: string;
+  Created: string;
+}
+
+export interface SPScan {
+  Id: number;
+  Title: string;
+  RawCode?: string;
+  Location?: string;
+  Carrier?: string;
+  ScanNote?: string;
+  Created: string;
+}
+
+export interface FetchResult {
+  orders: SPOrder[];
+  packages: SPPackage[];
+  scans: SPScan[];
+}
+
+export function postFetch(): Promise<FetchResult> {
+  return post<FetchResult>({ action: 'fetch' });
+}
+
 export function postImport(input: {
   vendor: string;
   po: string;
