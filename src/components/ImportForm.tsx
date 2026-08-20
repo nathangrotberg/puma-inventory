@@ -7,6 +7,7 @@ export default function ImportForm() {
   const [po, setPo] = useState('');
   const [eta, setEta] = useState('');
   const [notes, setNotes] = useState('');
+  const [requestedBy, setRequestedBy] = useState('');
   const [lines, setLines] = useState('');
   const [status, setStatus] = useState('');
   const [busy, setBusy] = useState(false);
@@ -18,9 +19,16 @@ export default function ImportForm() {
       .map((l) => l.trim())
       .filter(Boolean)
       .map((l) => {
-        const [num, contents] = l.split('|').map((p) => p.trim());
+        const [num, contents, cost] = l.split('|').map((p) => p.trim());
         const parsed = parseScan(num);
-        return { tracking: parsed.tracking, carrier: parsed.carrier, contents: contents || '', raw: num, eta };
+        return {
+          tracking: parsed.tracking,
+          carrier: parsed.carrier,
+          contents: contents || '',
+          cost: (cost || '').replace(/[^0-9.]/g, ''),
+          raw: num,
+          eta,
+        };
       });
     if (!vendor || packages.length === 0) {
       setStatus('Vendor and at least one tracking number are required.');
@@ -29,12 +37,13 @@ export default function ImportForm() {
     setBusy(true);
     setStatus('Creating order...');
     try {
-      const r = await postImport({ vendor, po, eta, notes, packages });
+      const r = await postImport({ vendor, po, eta, notes, requestedBy, packages });
       setStatus(r.ok ? `Order ${r.orderId} created with ${r.packagesCreated} package(s). Now expecting them.` : 'Import failed.');
       setVendor('');
       setPo('');
       setEta('');
       setNotes('');
+      setRequestedBy('');
       setLines('');
     } catch (err) {
       setStatus(String(err));
@@ -47,8 +56,8 @@ export default function ImportForm() {
     <form className="import" onSubmit={submit}>
       <p className="hint">
         Log what is on the way: paste the tracking numbers from the vendor's ship
-        notification. One per line, optional contents after a pipe:
-        <code> 1Z... | 24-port switch</code>
+        notification. One per line, optional item name and cost after pipes:
+        <code> 1Z... | 24-port switch | 379.00</code>
       </p>
       <label>
         Vendor
@@ -65,6 +74,10 @@ export default function ImportForm() {
       <label>
         Tracking numbers
         <textarea rows={5} value={lines} onChange={(e) => setLines(e.target.value)} placeholder={'1Z999AA10123456784 | data logger\n779841234567'} />
+      </label>
+      <label>
+        Requested by
+        <input value={requestedBy} onChange={(e) => setRequestedBy(e.target.value)} placeholder="optional" />
       </label>
       <label>
         Notes

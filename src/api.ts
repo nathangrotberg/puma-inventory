@@ -52,6 +52,7 @@ export interface SPOrder {
   Source?: string;
   ETA?: string | null;
   Notes?: string;
+  RequestedBy?: string;
   Created: string;
 }
 
@@ -65,6 +66,7 @@ export interface SPPackage {
   ReceivedAt?: string | null;
   ReceivedLocation?: string;
   Contents?: string;
+  Cost?: number | null;
   Created: string;
 }
 
@@ -93,7 +95,8 @@ export function postImport(input: {
   po: string;
   eta?: string;
   notes?: string;
-  packages: { tracking: string; carrier?: string; contents?: string; eta?: string; raw?: string }[];
+  requestedBy?: string;
+  packages: { tracking: string; carrier?: string; contents?: string; eta?: string; raw?: string; cost?: string }[];
 }): Promise<ImportResult> {
   return post<ImportResult>({ action: 'import', ...input });
 }

@@ -253,9 +253,102 @@ tbody tr:hover { background: rgba(132, 188, 65, 0.06); }
 .badge.overdue { background: rgba(192, 83, 63, 0.2); color: #e07a63; }
 .badge.waiting { background: rgba(203, 152, 49, 0.15); color: var(--amber); }
 
+.badge.received { background: rgba(132, 188, 65, 0.18); color: var(--green); }
+
 .item-name { font-weight: 600; color: var(--text); }
 .tracking.small { font-size: 12px; color: var(--muted); }
 td .tracking { font-size: 13px; color: var(--muted); }
+
+tbody tr.clickable { cursor: pointer; }
+
+/* Summary strip */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--panel-2);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.stat-num { font-size: 22px; font-weight: 700; }
+.stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.stat.alert { border-color: var(--red); }
+.stat.alert .stat-num { color: #e07a63; }
+.stat.wide { grid-column: span 2; }
+.stat.wide .stat-num { color: var(--green); }
+
+/* Progress bar in Orders view */
+.progress-cell { display: flex; flex-direction: column; gap: 4px; min-width: 90px; }
+.progress-cell span { font-size: 13px; }
+.progress-bar { height: 5px; border-radius: 3px; background: var(--panel-2); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--green); border-radius: 3px; }
+
+.clear {
+  background: none;
+  border: 1px solid var(--panel-2);
+  color: var(--amber);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* Detail drawer */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 100vw);
+  background: var(--panel);
+  border-left: 2px solid var(--green);
+  padding: 20px 18px;
+  overflow-y: auto;
+  z-index: 41;
+}
+
+.drawer h3 { margin: 4px 40px 8px 0; font-size: 18px; }
+.drawer h4 { margin: 18px 0 8px; font-size: 13px; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; }
+.drawer-badges { margin-bottom: 10px; }
+.drawer dl { display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; font-size: 14px; margin: 0; }
+.drawer dt { color: var(--muted); }
+.drawer dd { margin: 0; word-break: break-word; }
+
+.drawer-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--panel-2);
+  border: none;
+  color: var(--text);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.drawer-scan {
+  background: var(--panel-2);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.drawer-scan.clickable { cursor: pointer; }
+.drawer-scan.clickable:hover { outline: 1px solid var(--green-mid); }
 
 @media (min-width: 900px) {
   .table-view { display: block; }
@@ -266,11 +359,15 @@ td .tracking { font-size: 13px; color: var(--muted); }
     align-items: center;
     flex-wrap: wrap;
   }
-  .inv-controls .search { flex: 2 1 320px; width: auto; }
+  .inv-controls .search { flex: 2 1 280px; width: auto; }
   .inv-controls select { flex: 0 0 auto; }
-  .inv-controls .chips { flex: 0 0 auto; }
-  .inv-controls .chip { flex: 0 0 auto; padding: 8px 16px; }
-  .inv-controls .refresh { flex: 0 0 auto; }
+  .inv-controls .refresh, .inv-controls .clear { flex: 0 0 auto; }
+
+  .stat-strip { grid-template-columns: repeat(5, 1fr); }
+  .stat.wide { grid-column: auto; }
+
+  .chips { justify-content: flex-start; }
+  .chip { flex: 0 0 auto; padding: 8px 18px; }
 }
 
 .inv-controls .search {
