@@ -67,7 +67,7 @@ export default function Scanner({ location }: { location: string }) {
                 ...ev,
                 status: r.matched ? 'matched' : 'unmatched',
                 detail: r.matched
-                  ? `${r.vendor || 'Order'} ${r.po || ''} — package ${r.receivedPackages} of ${r.totalPackages} received`
+                  ? `${r.item ? r.item + ' · ' : ''}${r.vendor || 'Order'} ${r.po || ''} — package ${r.receivedPackages} of ${r.totalPackages} received`
                   : 'No expected shipment on file. Logged anyway.',
               }
             : ev,

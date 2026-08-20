@@ -132,6 +132,21 @@ export default function Inventory() {
     return vals.some((v) => (v || '').toLowerCase().includes(needle));
   }
 
+  const pkgByTracking = useMemo(() => {
+    const m = new Map<string, SPPackage>();
+    (data?.packages || []).forEach((p) => m.set(p.Title, p));
+    return m;
+  }, [data]);
+
+  function itemName(p: SPPackage): string {
+    return p.Contents || '(item not identified)';
+  }
+
+  function scanItemName(title: string): string {
+    const p = pkgByTracking.get(title);
+    return p?.Contents || '(no order on file)';
+  }
+
   const have = (data?.packages || [])
     .filter((p) => p.PkgStatus === 'received')
     .filter((p) => loc === 'All locations' || p.ReceivedLocation === loc)
@@ -143,7 +158,7 @@ export default function Inventory() {
 
   const activity = (data?.scans || [])
     .filter((s) => loc === 'All locations' || s.Location === loc)
-    .filter((s) => matchesQ(s.Title, s.RawCode, s.ScanNote, s.Location));
+    .filter((s) => matchesQ(s.Title, s.RawCode, s.ScanNote, s.Location, scanItemName(s.Title)));
 
   const counts = {
     have: (data?.packages || []).filter((p) => p.PkgStatus === 'received').length,
@@ -152,18 +167,18 @@ export default function Inventory() {
   };
 
   const haveCols: Column<SPPackage>[] = [
+    { key: 'item', label: 'Item', sort: (p) => itemName(p), render: (p) => <span className="item-name">{itemName(p)}</span> },
     { key: 'tracking', label: 'Tracking', sort: (p) => p.Title, render: (p) => <span className="tracking">{p.Title}</span> },
     { key: 'order', label: 'Vendor / PO', sort: (p) => orderLabel(p), render: (p) => orderLabel(p) },
-    { key: 'contents', label: 'Contents', sort: (p) => p.Contents || '', render: (p) => p.Contents || '' },
     { key: 'carrier', label: 'Carrier', sort: (p) => p.Carrier || '', render: (p) => p.Carrier || '' },
     { key: 'location', label: 'Location', sort: (p) => p.ReceivedLocation || '', render: (p) => p.ReceivedLocation || '' },
     { key: 'received', label: 'Received', sort: (p) => p.ReceivedAt || '', render: (p) => fmtDate(p.ReceivedAt) },
   ];
 
   const expectingCols: Column<SPPackage>[] = [
+    { key: 'item', label: 'Item', sort: (p) => itemName(p), render: (p) => <span className="item-name">{itemName(p)}</span> },
     { key: 'tracking', label: 'Tracking', sort: (p) => p.Title, render: (p) => <span className="tracking">{p.Title}</span> },
     { key: 'order', label: 'Vendor / PO', sort: (p) => orderLabel(p), render: (p) => orderLabel(p) },
-    { key: 'contents', label: 'Contents', sort: (p) => p.Contents || '', render: (p) => p.Contents || '' },
     { key: 'carrier', label: 'Carrier', sort: (p) => p.Carrier || '', render: (p) => p.Carrier || '' },
     { key: 'eta', label: 'ETA', sort: (p) => p.ETA || '9999', render: (p) => fmtDay(p.ETA) },
     {
@@ -180,9 +195,9 @@ export default function Inventory() {
   ];
 
   const activityCols: Column<SPScan>[] = [
+    { key: 'item', label: 'Item', sort: (s) => scanItemName(s.Title), render: (s) => <span className="item-name">{scanItemName(s.Title)}</span> },
     { key: 'code', label: 'Scanned code', sort: (s) => s.Title, render: (s) => <span className="tracking">{s.Title}</span> },
     { key: 'location', label: 'Location', sort: (s) => s.Location || '', render: (s) => s.Location || '' },
-    { key: 'carrier', label: 'Carrier', sort: (s) => s.Carrier || '', render: (s) => s.Carrier || '' },
     { key: 'note', label: 'Note', sort: (s) => s.ScanNote || '', render: (s) => s.ScanNote || '' },
     { key: 'time', label: 'Time', sort: (s) => s.Created, render: (s) => fmtDate(s.Created) },
   ];
@@ -249,12 +264,11 @@ export default function Inventory() {
                   .map((p) => (
                     <div key={p.Id} className="event matched">
                       <div className="event-top">
-                        <span className="tracking">{p.Title}</span>
+                        <span className="item-name">{itemName(p)}</span>
                         <span className="meta">{p.ReceivedLocation || '?'} · {fmtDate(p.ReceivedAt)}</span>
                       </div>
                       <div className="detail">
-                        {orderLabel(p)}
-                        {p.Contents ? ` · ${p.Contents}` : ''}
+                        <span className="tracking small">{p.Title}</span> · {orderLabel(p)}
                       </div>
                     </div>
                   ))}
@@ -271,14 +285,13 @@ export default function Inventory() {
                     return (
                       <div key={p.Id} className={`event ${overdue ? 'error' : 'unmatched'}`}>
                         <div className="event-top">
-                          <span className="tracking">{p.Title}</span>
+                          <span className="item-name">{itemName(p)}</span>
                           <span className="meta">
                             {p.Carrier || ''}{p.ETA ? ` · ETA ${fmtDay(p.ETA)}` : ''}
                           </span>
                         </div>
                         <div className="detail">
-                          {orderLabel(p)}
-                          {p.Contents ? ` · ${p.Contents}` : ''}
+                          <span className="tracking small">{p.Title}</span> · {orderLabel(p)}
                           {overdue ? ' · OVERDUE' : age > 0 ? ` · expected ${age}d ago` : ''}
                         </div>
                       </div>
@@ -292,12 +305,13 @@ export default function Inventory() {
                 {activity.map((s) => (
                   <div key={s.Id} className="event">
                     <div className="event-top">
-                      <span className="tracking">{s.Title}</span>
+                      <span className="item-name">{scanItemName(s.Title)}</span>
                       <span className="meta">{s.Location || '?'} · {fmtDate(s.Created)}</span>
                     </div>
-                    {(s.ScanNote || s.Carrier) && (
-                      <div className="detail">{[s.Carrier, s.ScanNote].filter(Boolean).join(' · ')}</div>
-                    )}
+                    <div className="detail">
+                      <span className="tracking small">{s.Title}</span>
+                      {s.ScanNote ? ` · ${s.ScanNote}` : ''}
+                    </div>
                   </div>
                 ))}
                 {activity.length === 0 && <p className="hint">No scans yet{q ? ' matching the search' : ''}.</p>}

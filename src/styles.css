@@ -253,6 +253,10 @@ tbody tr:hover { background: rgba(132, 188, 65, 0.06); }
 .badge.overdue { background: rgba(192, 83, 63, 0.2); color: #e07a63; }
 .badge.waiting { background: rgba(203, 152, 49, 0.15); color: var(--amber); }
 
+.item-name { font-weight: 600; color: var(--text); }
+.tracking.small { font-size: 12px; color: var(--muted); }
+td .tracking { font-size: 13px; color: var(--muted); }
+
 @media (min-width: 900px) {
   .table-view { display: block; }
   .cards-view { display: none; }

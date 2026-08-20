@@ -1,5 +1,6 @@
 export interface ScanResult {
   matched: boolean;
+  item?: string;
   packageId?: string;
   vendor?: string | null;
   po?: string | null;
