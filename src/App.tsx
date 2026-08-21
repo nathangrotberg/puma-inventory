@@ -62,10 +62,10 @@ export default function App() {
 
       <nav>
         <button className={tab === 'scan' ? 'active' : ''} onClick={() => setTab('scan')}>
-          Scan received
+          Scan new item
         </button>
         <button className={tab === 'expect' ? 'active' : ''} onClick={() => setTab('expect')}>
-          Add expected
+          En route
         </button>
         <button className={tab === 'inventory' ? 'active' : ''} onClick={() => setTab('inventory')}>
           Inventory

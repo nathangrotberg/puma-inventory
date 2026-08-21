@@ -84,7 +84,7 @@ export default function ImportForm() {
         <input value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="optional" />
       </label>
       <button type="submit" disabled={busy}>
-        {busy ? 'Working...' : 'Add expected shipment'}
+        {busy ? 'Working...' : 'Add en route shipment'}
       </button>
       {status && <p className="status">{status}</p>}
     </form>
