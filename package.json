@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "test": "vitest run",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "proxy": "node server/local.mjs",
+    "proxy:writes": "MX_ALLOW_WRITES=true node server/local.mjs"
   },
   "dependencies": {
     "@zxing/browser": "^0.1.5",

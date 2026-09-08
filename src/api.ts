@@ -100,3 +100,67 @@ export function postImport(input: {
 }): Promise<ImportResult> {
   return post<ImportResult>({ action: 'import', ...input });
 }
+
+// ---------------------------------------------------------------- MaintainX
+// MaintainX is reached through its own proxy, not the SharePoint flow: the
+// proxy holds the bearer token server-side. Configured separately so the
+// retired SharePoint POC keeps working while MaintainX becomes the database.
+
+import type {
+  ResolveResponse,
+  ReceiveRequest,
+  ReceiveResponse,
+  OnHandResponse,
+  IssueRequest,
+} from './mxContract';
+
+export function mxUrl(): string {
+  return localStorage.getItem('mxUrl') || (import.meta.env.VITE_MX_URL as string) || '';
+}
+
+async function mxPost<T>(payload: unknown): Promise<T> {
+  const url = mxUrl();
+  if (!url) throw new Error('No MaintainX endpoint configured. Open Settings and paste the proxy URL.');
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload),
+  });
+  const body = await res.json().catch(() => null);
+  if (!res.ok) throw new Error(body?.error || `MaintainX proxy returned ${res.status}`);
+  return body as T;
+}
+
+export function mxResolve(code: string, tracking?: { tracking: string; carrier: string }) {
+  return mxPost<ResolveResponse>({ action: 'mx-resolve', code, tracking });
+}
+
+export function mxReceive(req: Omit<ReceiveRequest, 'action'>) {
+  return mxPost<ReceiveResponse>({ action: 'mx-receive', ...req });
+}
+
+export function mxOnHand(locationIds?: number[]) {
+  return mxPost<OnHandResponse>({ action: 'mx-onhand', locationIds });
+}
+
+export function mxIssue(req: Omit<IssueRequest, 'action'>) {
+  return mxPost<ReceiveResponse>({ action: 'mx-issue', ...req });
+}
+
+export interface MxHealth {
+  ok: boolean;
+  writesEnabled: boolean;
+  allocationFieldsReady: boolean;
+  indexed: { parts: number; assets: number } | null;
+}
+
+export async function mxHealth(): Promise<MxHealth | null> {
+  const url = mxUrl();
+  if (!url) return null;
+  try {
+    const res = await fetch(url.replace(/\/?$/, '/') + 'health');
+    return res.ok ? ((await res.json()) as MxHealth) : null;
+  } catch {
+    return null;
+  }
+}

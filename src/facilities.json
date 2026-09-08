@@ -1,0 +1,431 @@
+{
+ "generatedAt": "2026-09-08",
+ "source": "QuickBase Systems/Purchase Orders br96xsmve + MaintainX /v1/locations (org 62357)",
+ "note": "handle is the allocation key. MEW means unallocated and maps to GENERAL_INVENTORY, which is why it has no locationId.",
+ "matched": 41,
+ "total": 45,
+ "facilities": [
+  {
+   "handle": "MEW",
+   "name": "Maas Energy Works",
+   "payingEntity": "Maas Energy Works, LLC",
+   "poCount": 180,
+   "locationId": null,
+   "locationName": null
+  },
+  {
+   "handle": "MVH",
+   "name": "Magic Valley Hub",
+   "payingEntity": "RAM Energy Works LLC",
+   "poCount": 10,
+   "locationId": 321758,
+   "locationName": "MVH  - Magic Valley Hub",
+   "ambiguous": true,
+   "alternates": [
+    {
+     "id": 321758,
+     "name": "MVH  - Magic Valley Hub"
+    },
+    {
+     "id": 3709298,
+     "name": "MVH - BGX"
+    },
+    {
+     "id": 3709300,
+     "name": "MVH - Paques"
+    },
+    {
+     "id": 3709299,
+     "name": "MVH - Roeslein"
+    }
+   ]
+  },
+  {
+   "handle": "FCJ",
+   "name": "Full Circle Jerseys",
+   "payingEntity": "FC Jerseys Energy, LLC",
+   "poCount": 8,
+   "locationId": 321743,
+   "locationName": "FCJ - Full Circle Jerseys"
+  },
+  {
+   "handle": "SKY",
+   "name": "Skyline Dairy Digesters",
+   "payingEntity": "Skyline Biogas, LLC",
+   "poCount": 6,
+   "locationId": 1742060,
+   "locationName": "SKY - Skyline Dairy"
+  },
+  {
+   "handle": "FPP",
+   "name": "Five Points Biogas Pipeline",
+   "payingEntity": "Five Points Pipeline LLC",
+   "poCount": 5,
+   "locationId": 321741,
+   "locationName": "FPP - Five Points Pipeline"
+  },
+  {
+   "handle": "HPT",
+   "name": "High Plains Dairy Digester",
+   "payingEntity": "Route 86 Biogas, LLC",
+   "poCount": 5,
+   "locationId": 2681505,
+   "locationName": "HPT - High Plains"
+  },
+  {
+   "handle": "CPL",
+   "name": "CDF Pipeline",
+   "payingEntity": "Calgren Dairy Fuels, LLC",
+   "poCount": 4,
+   "locationId": 321726,
+   "locationName": "CPL - Calgren Pipeline"
+  },
+  {
+   "handle": "LSH",
+   "name": "Lakeside Pipeline Hub",
+   "payingEntity": "Lakeside Pipeline, LLC",
+   "poCount": 4,
+   "locationId": 321753,
+   "locationName": "LSH - Lakeside Hub",
+   "ambiguous": true,
+   "alternates": [
+    {
+     "id": 343092,
+     "name": "LSH - GS1 - Lakeside Engine 1"
+    },
+    {
+     "id": 343093,
+     "name": "LSH - GS1 - Lakeside Engine 2"
+    },
+    {
+     "id": 321753,
+     "name": "LSH - Lakeside Hub"
+    }
+   ]
+  },
+  {
+   "handle": "DJS",
+   "name": "De Jager Farms South Dairy Digester",
+   "payingEntity": "DJ South Dairy Biogas LLC",
+   "poCount": 3,
+   "locationId": 321732,
+   "locationName": "DJS - De Jager South"
+  },
+  {
+   "handle": "DLD",
+   "name": "Dakota Line Dairy Digester",
+   "payingEntity": "Dakota Line Energy LLC",
+   "poCount": 3,
+   "locationId": 4021352,
+   "locationName": "DLD - Dakota Line"
+  },
+  {
+   "handle": "GS4",
+   "name": "Cactus Hub #4 (Exum)",
+   "payingEntity": "Greengasco, LLC",
+   "poCount": 3,
+   "locationId": 964576,
+   "locationName": "GS4 - Cactus Hub #4"
+  },
+  {
+   "handle": "GVD",
+   "name": "Grand View Dairy Digester",
+   "payingEntity": "Grand View Dairy",
+   "poCount": 3,
+   "locationId": 4755481,
+   "locationName": "GVD - Grand View (CA)"
+  },
+  {
+   "handle": "JDS",
+   "name": "JDS Ranch Dairy Digester",
+   "payingEntity": "JDS Dairy Biogas LLC",
+   "poCount": 3,
+   "locationId": 1742074,
+   "locationName": "JDS - JDS Ranch"
+  },
+  {
+   "handle": "LSP",
+   "name": "Lakeside Biogas Pipeline",
+   "payingEntity": "Lakeside Pipeline LLC",
+   "poCount": 3,
+   "locationId": 321754,
+   "locationName": "LSP - Lakeside Pipeline"
+  },
+  {
+   "handle": "MCP",
+   "name": "Merced Biogas Pipeline",
+   "payingEntity": "Merced Pipeline LLC",
+   "poCount": 3,
+   "locationId": 321763,
+   "locationName": "MCP - Merced Pipeline"
+  },
+  {
+   "handle": "TEP",
+   "name": "Tipton East Biogas Pipeline",
+   "payingEntity": "Calgren Dairy Fuels LLC",
+   "poCount": 3,
+   "locationId": 1078896,
+   "locationName": "TEP - Tipton East Pipeline"
+  },
+  {
+   "handle": "WCT",
+   "name": "Wildcat Dairy Digester (TX)",
+   "payingEntity": "Central Texas Biogas LLC",
+   "poCount": 3,
+   "locationId": 321800,
+   "locationName": "WCT - Wildcat Dairy"
+  },
+  {
+   "handle": "BSD",
+   "name": "Blue Sky Dairy Digester",
+   "payingEntity": "Blue Sky Dairy Biogas LLC",
+   "poCount": 2,
+   "locationId": 1742088,
+   "locationName": "BSD - Blue Sky"
+  },
+  {
+   "handle": "DTV",
+   "name": "Still Water Ranch Dairy Digester",
+   "payingEntity": "Still Water Power, LLC",
+   "poCount": 2,
+   "locationId": 321785,
+   "locationName": "DTV - Stillwater"
+  },
+  {
+   "handle": "FPH",
+   "name": "Five Points Biogas Facility",
+   "payingEntity": "Five Points Pipeline LLC",
+   "poCount": 2,
+   "locationId": 321740,
+   "locationName": "FPH - Five Points Hub"
+  },
+  {
+   "handle": "HMN",
+   "name": "Homen Dairy Digester",
+   "payingEntity": "Homen Dairy Biogas LLC",
+   "poCount": 2,
+   "locationId": 802411,
+   "locationName": "HMN - Homen"
+  },
+  {
+   "handle": "AHV",
+   "name": "Ahlem Farms Vista Dairy Digester",
+   "payingEntity": "Denair Biogas LLC",
+   "poCount": 1,
+   "locationId": 1742069,
+   "locationName": "AHV - Ahlem"
+  },
+  {
+   "handle": "BKD",
+   "name": "Brooksco Dairy Digester",
+   "payingEntity": "Brooksco Biogas LLC",
+   "poCount": 1,
+   "locationId": 4287939,
+   "locationName": "BKD - Brooksco"
+  },
+  {
+   "handle": "CHD",
+   "name": "CDF Howard Dairy Digester",
+   "payingEntity": "San Joaquin Valley Energy, LLC",
+   "poCount": 1,
+   "locationId": null,
+   "locationName": null
+  },
+  {
+   "handle": "CNT",
+   "name": "Countryside Dairy Digester",
+   "payingEntity": "Countryside Dairy Biogas LLC",
+   "poCount": 1,
+   "locationId": 1461198,
+   "locationName": "CNT - Countryside"
+  },
+  {
+   "handle": "DBR",
+   "name": "De Boer Dairy Digester",
+   "payingEntity": "Tipton Pipeline, LLC",
+   "poCount": 1,
+   "locationId": 321731,
+   "locationName": "DBR - De Boer"
+  },
+  {
+   "handle": "EXM",
+   "name": "Exum Farms Dairy Digester",
+   "payingEntity": "Greengasco, LLC",
+   "poCount": 1,
+   "locationId": 321737,
+   "locationName": "EXM - Exum"
+  },
+  {
+   "handle": "GS2",
+   "name": "Cactus Hub #2",
+   "payingEntity": "Greengasco, LLC",
+   "poCount": 1,
+   "locationId": 321724,
+   "locationName": "GS2 - Cactus Hub # 2"
+  },
+  {
+   "handle": "GSH",
+   "name": "Cactus Hub #1",
+   "payingEntity": "Greengasco, LLC",
+   "poCount": 1,
+   "locationId": 321723,
+   "locationName": "GSH - Cactus Hub # 1"
+  },
+  {
+   "handle": "GVT",
+   "name": "Grand View Dairy (TX)",
+   "payingEntity": "Route 86 Biogas, LLC",
+   "poCount": 1,
+   "locationId": 2681503,
+   "locationName": "GVT - Grand View (TX)"
+  },
+  {
+   "handle": "HOO",
+   "name": "Oak Creek Dairy (previously DeHoog or Hoogendam)",
+   "payingEntity": "Hoogendam Dairy Biogas LLC",
+   "poCount": 1,
+   "locationId": 321749,
+   "locationName": "HOO - Oak Creek"
+  },
+  {
+   "handle": "HRD",
+   "name": "High Roller Dairy Digester",
+   "payingEntity": "River Ranch Farms, LLC",
+   "poCount": 1,
+   "locationId": 321747,
+   "locationName": "HRD - High Roller"
+  },
+  {
+   "handle": "JRD",
+   "name": "JR Dairy Digester",
+   "payingEntity": "Calgren Dairy Fuels LLC",
+   "poCount": 1,
+   "locationId": 321751,
+   "locationName": "JRD - JR Dairy"
+  },
+  {
+   "handle": "LED",
+   "name": "Lakeside Energy Dairy Digester",
+   "payingEntity": "Lakeside Energy, LLC",
+   "poCount": 1,
+   "locationId": 321752,
+   "locationName": "LED - Lakeside Dairy"
+  },
+  {
+   "handle": "LJV",
+   "name": "Vanderham Dairy Digester",
+   "payingEntity": "L&J Vanderham Energy, LLC",
+   "poCount": 1,
+   "locationId": 321796,
+   "locationName": "LJV - Vanderham"
+  },
+  {
+   "handle": "MCH",
+   "name": "Merced Pipeline Biogas Facility",
+   "payingEntity": "Merced Pipeline LLC",
+   "poCount": 1,
+   "locationId": 321762,
+   "locationName": "MCH - Merced Hub",
+   "ambiguous": true,
+   "alternates": [
+    {
+     "id": 321762,
+     "name": "MCH - Merced Hub"
+    },
+    {
+     "id": 2934911,
+     "name": "MCH - Truck Unloading Station"
+    }
+   ]
+  },
+  {
+   "handle": "MEL",
+   "name": "Melo Dairy",
+   "payingEntity": "Melo Dairy Biogas LLC",
+   "poCount": 1,
+   "locationId": 1461733,
+   "locationName": "MEL - Melo Dairy"
+  },
+  {
+   "handle": "OVH",
+   "name": "Oak Valley Pipeline Hub",
+   "payingEntity": "Oak Valley Energy LLC",
+   "poCount": 1,
+   "locationId": null,
+   "locationName": null
+  },
+  {
+   "handle": "RCC",
+   "name": "Revier Cattle Co.",
+   "payingEntity": "Maas Energy Works, LLC",
+   "poCount": 1,
+   "locationId": null,
+   "locationName": null
+  },
+  {
+   "handle": "RRA",
+   "name": "River Ranch Dairy Digester",
+   "payingEntity": "River Ranch Farms, LLC",
+   "poCount": 1,
+   "locationId": 321776,
+   "locationName": "RRA - River Ranch"
+  },
+  {
+   "handle": "SR1",
+   "name": "South Ridge 1 Dairy Digester",
+   "payingEntity": "Highlands Energy, LLC",
+   "poCount": 1,
+   "locationId": 1785786,
+   "locationName": "SR1 - Southridge"
+  },
+  {
+   "handle": "TRO",
+   "name": "J Troost Dairy Digester",
+   "payingEntity": "Troost Dairy Biogas LLC",
+   "poCount": 1,
+   "locationId": 1461658,
+   "locationName": "TRO - Troost"
+  },
+  {
+   "handle": "VDH",
+   "name": "Van der Hoek Dairy Digester",
+   "payingEntity": "Van der Hoek Dairy Biogas, LLC",
+   "poCount": 1,
+   "locationId": 321790,
+   "locationName": "VDH - Van der Hoek"
+  },
+  {
+   "handle": "VVD",
+   "name": "Vista Verde Dairy Digester",
+   "payingEntity": "Vista Verde Dairy Biogas LLC",
+   "poCount": 1,
+   "locationId": 321798,
+   "locationName": "VVD - Vista Verde"
+  },
+  {
+   "handle": "WBK",
+   "name": "Westbrook Dairy Digester",
+   "payingEntity": "Westbrook Biogas LLC",
+   "poCount": 1,
+   "locationId": 4338088,
+   "locationName": "WBK - Westbrook"
+  }
+ ],
+ "receiveLocations": [
+  {
+   "key": "Redding",
+   "locationId": 3579125,
+   "path": "Redding, CA / CT3 - Court St 3: Tech Hub (1716 Court St)"
+  },
+  {
+   "key": "Visalia",
+   "locationId": 395602,
+   "path": "VIS - Visalia Office"
+  },
+  {
+   "key": "Meadowview",
+   "locationId": 2042237,
+   "path": "Redding, CA / MDV - Meadow View Office"
+  }
+ ]
+}
